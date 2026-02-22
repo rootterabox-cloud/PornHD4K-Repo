@@ -1,0 +1,19 @@
+name: Build Extension
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        run: chmod +x gradlew && ./gradlew make
+      - name: Upload Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: PornHD4K-Extension
+          path: build/*.cs3
